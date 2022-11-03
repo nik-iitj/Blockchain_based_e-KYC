@@ -1,56 +1,89 @@
-import React from 'react'
-import Button from '@mui/material/Button';
-import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
-import Stack from '@mui/material/Stack';
+import React,{Component} from 'react'
+import Web3 from 'web3' 
 
 
 
-export const App = () => {
+class App extends Component {
 
-  function hello(){
-    const user = {
 
-      "id" : "MyID2",
-      "name" : "UserName",
-      "date" : "currentDate",
-      "link" : "docLink",
-      "status" : "pending"
+  async componentWillMount(){
+
+    await this.loadWeb3();
+
+  }
+
+  async loadWeb3(){
+    if(window.ethereum){
+
+      window.web3 = new Web3(window.ethereum)
+      await window.ethereum.enable()
+
+    } if(window.web3){
+
+      window.web3 = new Web3(window.web3.currentProvider)
+
+    } else {
+
+      window.alert('Please use Metamask!')
+
     }
-
-    let options = {
-      method: 'POST',
-      headers: {
-          'Content-Type':
-              'application/json'
-      },
-      body: JSON.stringify(user)
   }
 
-  let fres = fetch('http://localhost:5000/do',options)
+  constructor(props) {
+    super(props)
 
-  fres.then(res => res.json()).then(d=>{
-    console.log(d)
-  })
-
+    this.state = {
+      memeHash: '',
+      contract: null,
+      web3: null,
+      buffer: null,
+      account: null
+    }
   }
 
-  return (
+  // function hello(){
+  //   const user = {
 
-    <div>
-      <Button variant="contained" onClick={hello}>Contained</Button>
-      <Stack spacing={2} direction="row">
+  //     "id" : "MyID2",
+  //     "name" : "UserName",
+  //     "date" : "currentDate",
+  //     "link" : "docLink",
+  //     "status" : "pending"
+  //   }
 
-        <p1>In grogress</p1>
-        <HourglassBottomIcon></HourglassBottomIcon>
+  //   let options = {
+  //     method: 'POST',
+  //     headers: {
+  //         'Content-Type':
+  //             'application/json'
+  //     },
+  //     body: JSON.stringify(user)
+  // }
 
-      </Stack>  
+  // let fres = fetch('http://localhost:5000/do',options)
 
-    </div>
+  // fres.then(res => res.json()).then(d=>{
+  //   console.log(d)
+  // })
 
-    
+  // }
 
-    
-  )
+
+  render(){
+    return (
+
+      <div>
+
+  
+          <p1>In grogress</p1>
+        
+  
+      </div>
+  
+     
+    )
+  }
+
 }
 
 export default App
