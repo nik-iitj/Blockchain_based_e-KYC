@@ -9,6 +9,7 @@ class App extends Component {
   async componentWillMount(){
 
     await this.loadWeb3();
+    this.loadBlockchainData()
 
   }
 
@@ -29,15 +30,26 @@ class App extends Component {
     }
   }
 
+  async loadBlockchainData(){
+
+    const web3 = window.web3
+    const accounts = await web3.eth.getAccounts()
+    console.log(accounts)
+    this.setState({account:accounts[0]})
+
+  }
+
+
+
   constructor(props) {
     super(props)
 
     this.state = {
-      memeHash: '',
+      storageHash: '',
       contract: null,
       web3: null,
       buffer: null,
-      account: null
+      account: ''
     }
   }
 
@@ -68,6 +80,8 @@ class App extends Component {
 
   // }
 
+  //chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html#
+
 
   render(){
     return (
@@ -75,7 +89,7 @@ class App extends Component {
       <div>
 
   
-          <p1>In grogress</p1>
+          <p>{this.state.account}</p>
         
   
       </div>
