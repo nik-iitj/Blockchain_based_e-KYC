@@ -1,37 +1,26 @@
 import React,{useEffect, useState} from 'react'
-import Navbar from "./components/navbar"
-import Table from "./components/table"
-import { Box, Stack } from '@mui/material';
+
+
+
+
+import Login from './Login';
+import Dashboard from './dashboard/Dashboard'
 
 
 function App() {
 
-    const [requests,setRequests] = useState({})
 
-    useEffect(()=>{
+  var [flag, setFlag] = useState(true);
 
-      fetch("http://localhost:5000/getRequests").then(response => response.json()).then(
-  
-        data=>{
-        
-          setRequests(data)
-          
-        }
-  
-        )
-
-  
-    },[])
-
+var setFlag2 = (val) => {
+  setFlag(val);
+}
 
 
   return (
-    <Box>
-      <Navbar/>
-      <Stack>
-        <Table requests={requests}/>
-      </Stack>  
-    </Box>
+    <div>
+    {flag?<Login setFlag={setFlag2}/>:<Dashboard/>}
+    </div>
   )
 }
 

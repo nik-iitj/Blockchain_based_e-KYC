@@ -5,9 +5,6 @@ import {Box, Button, Stack} from '@mui/material';
 export default function Table(props) {
 
 
-  const rows = [
-    { id: 1, name: 'Snow', date: '16 Aug', doc: 'link' },
-  ];
 
   const [currentRequests,setCurrentRequests] = useState([])
 
@@ -42,32 +39,32 @@ export default function Table(props) {
 
 
   const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 90 },
+    { field: 'id', headerName: 'ID', width: 120 },
     {
       field: 'name',
       headerName: 'Name',
-      width: 150,
+      width: 200,
       editable: true,
     },
     {
 
       field:'date',
       headerName:'Date',
-      width:150
+      width:200
 
     },
 
     {
       field: 'doc',
       headerName: 'Documents',
-      width: 210,
+      width: 250,
       editable: true,
     },
 
     {
 
       field:'Action',
-      width:210,
+      width:250,
       renderCell: (cellValues)=>{
         return(
 
@@ -163,7 +160,7 @@ export default function Table(props) {
 
 
   return (
-    <Box sx={{ height: 400, width: '50%' }}>
+    <Box sx={{ height: 700, width: '80%' }}>
     <DataGrid
       rows={currentRequests}
       columns={columns}

@@ -106,11 +106,6 @@ app.get("/getRequests",(req,res) =>{
         arr[k] = localStorage.getItem(k)
     }
 
-
-
-    // var data = ["ss","date","linkk","pending"]
-    // localStorage.setItem("data",data)
-
     res.json(arr)
 
 
@@ -119,32 +114,36 @@ app.get("/getRequests",(req,res) =>{
 
 app.post("/verifyStatus",(req,res)=>{
 
-    // if (typeof localStorage === "undefined" || localStorage === null) {
-    //     var LocalStorage = require('node-localstorage').LocalStorage;
-    //     localStorage = new LocalStorage('./scratch');
-    //   }
-
-    //   const id = req.body.id
-
-    //   var data = localStorage.getItem(id)
-
-    //   const arr = data.split(",")
-
-    //   arr[3]=req.body.status
-
-      const cid = getFiles('files/',req)
 
 
-    //   arr.push(cid)
+    const status = req.body.status;
 
-    //   //add the data in the IPFS and get the Cid
-    //   //add in arr[4] and send to the user.
+    if(status === 'Accepted'){
+        const cid = getFiles('files/',req)
+    }
+    else{
+
+        if (typeof localStorage === "undefined" || localStorage === null) {
+            var LocalStorage = require('node-localstorage').LocalStorage;
+            localStorage = new LocalStorage('./scratch');
+        }
+
+        const id = req.body.id
+
+        var data = localStorage.getItem(id)
+
+        const arr = data.split(",")
+
+        arr[3]=req.body.status
+        localStorage.setItem(req.body.id, arr);
+
+    }
+
       
-    //   localStorage.setItem(req.body.id, arr);
     
 })
 
-
+//https://bafybeiav5m7543cxuiebrdwqidlhfpgl7azixrhllm5sl7p467w265v654.ipfs.w3s.link/
 
 app.listen(5000, ()=>{
     console.log("server is running")
